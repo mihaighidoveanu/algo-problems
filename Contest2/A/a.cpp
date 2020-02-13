@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 #include <vector>
+
+
+/* #define DEBUG 1 */
 /* #include <bits/stdc++> */
 
 int print(vector<vector<int>> matrix){
@@ -21,28 +24,46 @@ int print(vector<vector<int>> matrix){
 vector<int> solve(vector<vector<int>> matrix){
     int n = matrix.size();
     int m = matrix[0].size();
-// compute first stage first
+// compute first stage for all
     for(int i = 1; i < n; i ++){
         matrix[i][0] += matrix[i - 1][0];
     }
-    cout<<"First stage" << "\n";
+#ifdef DEBUG
+    cout<<"1 stage" << "\n";
     print(matrix);
-// compute second stage
+#endif
+// compute first machine fully
     for(int j = 1; j < m; j++){
         matrix[0][j] += matrix[0][j - 1];
     }
-    cout<<"Second stage" << "\n";
+#ifdef DEBUG
+    cout<<"2 stage" << "\n";
     print(matrix);
+#endif
 // run algorithm
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            
-
+    for(int i = 1; i < n; i++){
+        for(int j = 1; j < m; j++){
+            if( matrix[i - 1][j] <= matrix[i][j - 1]){
+                // current stage ended on previous machine
+               matrix[i][j] += matrix[i][j - 1];
+            }
+            else{
+                // wait for the current stage to end on previous machine
+                int wait = matrix[i - 1][j] - matrix[i][j - 1];
+                matrix[i][j] += matrix[i][j - 1] + wait;
+            }
         }
     }
-
-
+#ifdef DEBUG
+    cout<<"3 stage" << "\n";
+    print(matrix);
+#endif
+// collect results
     vector<int> result(n, 0);
+    for(int i = 0; i < n; i++){
+        result[i] = matrix[i].back();
+    }
+
     return result;
 }
 
@@ -58,8 +79,9 @@ int main(){
             matrix[i][j] = x;
         }
     }
-    print(matrix);
     vector<int> times = solve(matrix);
-    cout << "Result size " << times.size() << "\n";
+    for(int i = 0; i < times.size(); i++){
+        cout << times[i] << " ";
+    }
     return 0;
 }
