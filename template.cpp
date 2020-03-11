@@ -10,6 +10,7 @@
 #include <queue>
 #include <list>
 #include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -19,14 +20,7 @@ typedef pair<ll, ll> ii;
 typedef vector<ll> vi;
 typedef vector<vi> vvi;
 typedef vector<ii> vii;
-
-#define pb push_back
-#define eb emplace_back
-#define rep(i,a,b) for(auto i=(a); i<(b); ++i)
-#define REP(i,n) rep(i,0,n)
-#define all(v) (v).begin(), (v).end()
-#define sz(v) ((int) (v).size())
-#define rs resize
+typedef vector<string> vs;
 
 template<class T> ostream& operator<<(ostream &os, vector<T> v) {
 	os << "\n[";
@@ -34,8 +28,12 @@ template<class T> ostream& operator<<(ostream &os, vector<T> v) {
 	return os << "]\n";
 }
 
+template<class T> ostream& operator<<(ostream &os, pair<T, T> x) {
+    os << x.first << "_" << x.second << " ";
+    return os;
+}
+
 void run() {
-	
 }
 
 
