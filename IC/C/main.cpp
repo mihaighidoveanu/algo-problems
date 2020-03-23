@@ -62,6 +62,7 @@ void run() {
     // Plan is to transform the moves from the (x,y,z) space to a 2d matrix coordinate space. 
     // Using the matrix, we can save the location of triangles. 
     // So after simulating the cut, we can count the locations.
+    vvi m;
 }
 
 

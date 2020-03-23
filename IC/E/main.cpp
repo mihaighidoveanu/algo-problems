@@ -91,7 +91,7 @@ bool check_group(vector<pair<int, char>> cards){
     }
     // check if there is at least one bucket with 3 elements
     for (auto const & bucket : buckets) {
-        if (bucket.size() == 3) {
+        if (bucket.size() >= 3) {
            return true ;
         }
     }
